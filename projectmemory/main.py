@@ -24,6 +24,31 @@ from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
+class Memory(ndb.Model):
+    send_to= ndb.StringProperty(required=True)
+    topic= ndb.StringProperty(required=True)
+    content= ndb.TextProperty(required=True)
+    delivery= ndb.DateTimeProperty(required=True)
+    submit= ndb.DateTimeProperty(required=True, auto_now=True)
+
+class MemoryHandler(webapp2.RequestHandler):
+    def get(self):
+         memory= Memory.query().fetch()
+         memory.sort(key=lambda x:x.date, reverse=True)
+         template= env.get_template("save.html")
+         variables= {'posts': posts}
+         self.response.write(template.render(variables))
+
+    def post(self):
+        title=self.request.get('title')
+        content=self.request.get('content')
+        post= Post(title=title,
+                    content=content,
+                    date=datetime.datetime.now())
+
+        post.put()
+        return self.redirect('/')
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
