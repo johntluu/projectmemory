@@ -24,8 +24,6 @@ from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
-<<<<<<< HEAD
-=======
 class Memory(ndb.Model):
     send_to= ndb.StringProperty(required=True)
     topic= ndb.StringProperty(required=True)
@@ -50,7 +48,6 @@ class MemoryHandler(webapp2.RequestHandler):
 
         post.put()
         return self.redirect('/')
->>>>>>> 99e5ed4041967595ca92d0324b8783c1180fb341
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
