@@ -24,6 +24,7 @@ from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
@@ -52,9 +53,12 @@ class LoginHandler(webapp2.RequestHandler):
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('profile.html')
-        template_vars2 = {}
+        user = users.get_current_user()
+        template = env.get_template('save.html')
+        self.response.write('Welcome, %s! ' % user.nickname())
+        template_vars2 = {'logout': users.create_logout_url('/')}
         self.response.write(template.render(template_vars2))
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
