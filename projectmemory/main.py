@@ -26,6 +26,7 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
         if user is None:
             template = env.get_template('index.html')
             template_vars = {'logout': users.create_logout_url('/'),
