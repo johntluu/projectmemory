@@ -26,28 +26,39 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('index.html')
-        template_vars = {'logout': users.create_logout_url('/'),
-                         'login': ('/login')}
-        self.response.write(template.render(template_vars))
+        user = users.get_current_user()
+        if user is None:
+            template = env.get_template('index.html')
+            template_vars = {'logout': users.create_logout_url('/'),
+                             'login': ('/login')}
+            self.response.write(template.render(template_vars))
+        else:
+            self.redirect('/profile')
 
 class LoginHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user is None:
-            login_url = users.create_login_url('/')
+            login_url = users.create_login_url('/profile')
             # self.response.write('<a href="%s">Log In</a>' % login_url)
             self.redirect(login_url)
 
         # The user is logged in.
         else:
-            self.redirect('http://www.google.com')
+            self.redirect('/profile')
             # logout_url = users.create_logout_url('/')
             # self.response.write('Welcome, %s! ' % user.email())
             # self.response.write('<a href="%s">Log Out</a>' % logout_url)
 
+class ProfileHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('profile.html')
+        template_vars2 = {}
+        self.response.write(template.render(template_vars2))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/login', LoginHandler)
+    ('/login', LoginHandler),
+    ('/profile', ProfileHandler),
 
 ], debug=True)
