@@ -31,26 +31,6 @@ class Memory(ndb.Model):
     delivery= ndb.DateTimeProperty()
     date= ndb.DateTimeProperty(required=True, auto_now=True)
 
-class MemoryHandler(webapp2.RequestHandler):
-    def get(self):
-         posts= Memory.query().fetch()
-         posts.sort(key=lambda x:x.date, reverse=True)
-         template= env.get_template("create.html")
-         variables= {'posts': posts}
-         self.response.write(template.render(variables))
-
-    def post(self):
-        title_var=self.request.get('title')
-        content_var=self.request.get('content')
-        send_to_var=self.request.get('send_to')
-        # delivery_var=self.request.get('delivery')
-        post= Memory(title=title_var,
-                   content=content_var,
-                   date=datetime.datetime.now(),
-                   send_to=send_to_var,)
-                #    delivery=delivery_var)
-        post.put()
-        return self.redirect('/')
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -86,6 +66,26 @@ class ProfileHandler(webapp2.RequestHandler):
         template_vars2 = {'logout': users.create_logout_url('/')}
         self.response.write(template.render(template_vars2))
 
+class MemoryHandler(webapp2.RequestHandler):
+    def get(self):
+         posts= Memory.query().fetch()
+         posts.sort(key=lambda x:x.date, reverse=True)
+         template= env.get_template("create.html")
+         variables= {'posts': posts}
+         self.response.write(template.render(variables))
+
+    def post(self):
+        title_var=self.request.get('title')
+        content_var=self.request.get('content')
+        send_to_var=self.request.get('send_to')
+        # delivery_var=self.request.get('delivery')
+        post= Memory(title=title_var,
+                   content=content_var,
+                   date=datetime.datetime.now(),
+                   send_to=send_to_var,)
+                #    delivery=delivery_var)
+        post.put()
+        return self.redirect('/')
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
