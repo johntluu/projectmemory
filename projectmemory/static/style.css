@@ -14,17 +14,38 @@ h1 {
   color: black;
   font-size: 40px;*/
 header {
-  background: #0088FF;
+  background: #427fed;
   font-family: 'Ruda', sans-serif;
   margin: 0;
   text-align: center;
   padding: 40px;
   margin: 20px;
 }
+body {
+  background: #427fed; }
+img {
+  width: 400px;
+  height: 400px;
+}
+#SignInButton {
+  text-align: center;
+  font-family: 'Ruda', sans-serif;
+  color: white;
+  font-weight: bold;
+  width: 100px;
+  font-size: 30px;
+  display: block;
+  border-style: solid;
+  border-color: black;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
 
 h2 {
   color: white;
-  font-size: 40px;
+  font-size: 80px;
 }
 
 .bubble {
