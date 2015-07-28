@@ -62,24 +62,23 @@ class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         template = env.get_template('profile.html')
+        posts= Memory.query().fetch()
+        posts.sort(key=lambda x:x.date, reverse=True)
         self.response.write('Welcome, %s! ' % user.nickname())
-        template_vars2 = {'logout': users.create_logout_url('/')}
+        template_vars2 = {'logout': users.create_logout_url('/'), 'posts': posts}
         self.response.write(template.render(template_vars2))
 
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
-         posts= Memory.query().fetch()
-         posts.sort(key=lambda x:x.date, reverse=True)
          template= env.get_template("create.html")
-         variables= {'posts': posts}
-         self.response.write(template.render(variables))
-         #
+         self.response.write(template.render())
+
     def post(self):
         subject_var=self.request.get('title')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
         # delivery_var=self.request.get('delivery')
-        post= Memory(title=title_var,
+        post= Memory(subject=subject_var,
                    content=content_var,
                    date=datetime.datetime.now(),
                    send_to=send_to_var,)
