@@ -1,18 +1,30 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400);
+@import url(http://fonts.googleapis.com/css?family=Ruda);
+@import url(http://fonts.googleapis.com/css?family=Special+Elite);
 
-header{
-  background: #0088FF;
+/*header{
+  background: #E8BC7B;
   text-align: center;
-}
-
-body {
-  background: #0088FF;
-  font-family: 'Lato', Arial;
-  margin: 0
+  font-family: 'Ruda', sans-serif;
+  font-family: 'Special Elite', cursive;
+  padding: 40px;
+  margin: 20px;
 }
 
 h1 {
-  color: blue;
+  color: black;
+  font-size: 40px;*/
+header {
+  background: #0088FF;
+  font-family: 'Ruda', sans-serif;
+  margin: 0;
+  text-align: center;
+  padding: 40px;
+  margin: 20px;
+}
+
+h2 {
+  color: white;
+  font-size: 40px;
 }
 
 .bubble {
