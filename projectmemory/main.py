@@ -28,7 +28,7 @@ class Memory(ndb.Model):
     send_to= ndb.StringProperty(required=True)
     subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
-    delivery= ndb.DateTimeProperty()
+    delivery= ndb.DateTimeProperty(required=True)
     date= ndb.DateTimeProperty(required=True, auto_now=True)
 
 
@@ -77,12 +77,12 @@ class CreateHandler(webapp2.RequestHandler):
         subject_var=self.request.get('title')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
-        # delivery_var=self.request.get('delivery')
+        delivery_var=self.request.get('delivery')
         post= Memory(subject=subject_var,
                    content=content_var,
                    date=datetime.datetime.now(),
-                   send_to=send_to_var,)
-                #    delivery=delivery_var)
+                   send_to=send_to_var,
+                   delivery=delivery_var)
         post.put()
         return self.redirect('/')
 
