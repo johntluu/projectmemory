@@ -17,8 +17,8 @@ header {
   font-family: 'Ruda', sans-serif;
   margin: 0;
   text-align: center;
-  padding: 40px;
-  margin: 20px;
+  padding: 5px;
+  margin: 10px;
 }
 body {
   background: #427fed;
@@ -26,6 +26,7 @@ body {
 img {
   width: 400px;
   height: 400px;
+  padding: 5px;
 }
 #SignInButton {
   text-align: center;
@@ -46,10 +47,5 @@ img {
 h2 {
   color: white;
   font-size: 80px;
-}
-
-.bubble {
-background-color: white;
-}
-
+  margin: 20px 20px 30px 20px;
 }
