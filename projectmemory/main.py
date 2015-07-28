@@ -26,7 +26,7 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class Memory(ndb.Model):
     send_to= ndb.StringProperty(required=True)
-    title= ndb.StringProperty(required=True)
+    subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
     delivery= ndb.DateTimeProperty()
     date= ndb.DateTimeProperty(required=True, auto_now=True)
@@ -66,16 +66,16 @@ class ProfileHandler(webapp2.RequestHandler):
         template_vars2 = {'logout': users.create_logout_url('/')}
         self.response.write(template.render(template_vars2))
 
-class MemoryHandler(webapp2.RequestHandler):
+class CreateHandler(webapp2.RequestHandler):
     def get(self):
-         posts= Memory.query().fetch()
+         posts= Create.query().fetch()
          posts.sort(key=lambda x:x.date, reverse=True)
          template= env.get_template("create.html")
          variables= {'posts': posts}
          self.response.write(template.render(variables))
          #
     def post(self):
-        title_var=self.request.get('title')
+        subject_var=self.request.get('title')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
         # delivery_var=self.request.get('delivery')
@@ -91,6 +91,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/profile', ProfileHandler),
-    ('/memory', MemoryHandler),
+    ('/create', CreateHandler),
 
 ], debug=True)
