@@ -9,25 +9,19 @@
       Not You? <a href="{{logout}}">Sign Out</a>
       <br>
       <div>
-        <form action="/profile">
+        <form action="/memory">
             <button>Create a new Memory!</button>
         </form>
       <!--<table style="width: 100%">-->
         <!-- {% if Memory %} -->
         {% for post in posts %}
-          <!--<tr>
-            <tc>{{post.title}}</tc>
-            <tc>{{post.send_to}}</tc>
-            <tc>{{post.date}}</tc>
-            <tc>{{post.delivery}}</tc>
-            <tc><button>delete</button></tc>
+          <tr>
+            <td>{{post.title}}</tc>
+            <td>{{post.send_to}}</tc>
+            <td>{{post.date}}</tc>
+            <td>{{post.delivery}}</tc>
+            <td><button>delete</button></tc>
           </tr>
-
-        -->
-          {{post.title}}
-          {{post.send_to}}
-          {{post.date}}
-          {{post.delivery}}
         {% endfor %}
         <!-- {% endif %} -->
       </table>
