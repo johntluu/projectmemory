@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Profile</title>
+    </head>
+    <body>
+      <br>
+      Not You? <a href="{{logout}}">Sign Out</a>
+      <br>
+      <div>
+        <form action="/memory">
+            <input type="submit" value="Create a new Memory!">
+        </form>
+      <table style="width: 100%">
+        <!-- {% if Memory %} -->
+        {% for post in posts %}
+          <tr>
+            <tc>{{post.submit}}</tc>
+            <tc>{{post.send_to}}</tc>
+            <tc>{{post.topic}}</tc>
+            <tc>{{post.delivery}}</tc>
+            <tc><button>delete</button></tc>
+          </tr>
+        {% endfor %}
+        <!-- {% endif %} -->
+      </table>
+    </body>
+</html>
