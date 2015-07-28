@@ -61,7 +61,7 @@ class LoginHandler(webapp2.RequestHandler):
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
-        template = env.get_template('save.html')
+        template = env.get_template('profile.html')
         self.response.write('Welcome, %s! ' % user.nickname())
         template_vars2 = {'logout': users.create_logout_url('/')}
         self.response.write(template.render(template_vars2))
