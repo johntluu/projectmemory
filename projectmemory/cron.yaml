@@ -1,4 +1,4 @@
 cron:
 - description: daily check
-  url: /tasks/summary
+  url: /scheduledtask.py
   schedule: every 1 mins
