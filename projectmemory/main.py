@@ -26,26 +26,29 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class Memory(ndb.Model):
     send_to= ndb.StringProperty(required=True)
-    topic= ndb.StringProperty(required=True)
+    title= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
-    delivery= ndb.DateTimeProperty(required=True)
-    submit= ndb.DateTimeProperty(required=True, auto_now=True)
+    delivery= ndb.DateTimeProperty()
+    date= ndb.DateTimeProperty(required=True, auto_now=True)
 
 class MemoryHandler(webapp2.RequestHandler):
     def get(self):
-         memory= Memory.query().fetch()
-         memory.sort(key=lambda x:x.date, reverse=True)
-         template= env.get_template("save.html")
+         posts= Memory.query().fetch()
+         posts.sort(key=lambda x:x.date, reverse=True)
+         template= env.get_template("create.html")
          variables= {'posts': posts}
          self.response.write(template.render(variables))
 
     def post(self):
-        title=self.request.get('title')
-        content=self.request.get('content')
-        post= Post(title=title,
-                    content=content,
-                    date=datetime.datetime.now())
-
+        title_var=self.request.get('title')
+        content_var=self.request.get('content')
+        send_to_var=self.request.get('send_to')
+        # delivery_var=self.request.get('delivery')
+        post= Memory(title=title_var,
+                   content=content_var,
+                   date=datetime.datetime.now(),
+                   send_to=send_to_var,)
+                #    delivery=delivery_var)
         post.put()
         return self.redirect('/')
 
@@ -88,5 +91,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/profile', ProfileHandler),
+    ('/memory', MemoryHandler),
 
 ], debug=True)
