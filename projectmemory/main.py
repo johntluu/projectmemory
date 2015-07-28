@@ -53,18 +53,46 @@ class LoginHandler(webapp2.RequestHandler):
 
         # The user is logged in.
         else:
-            self.redirect('/profile')
+            self.redirect('/')
             # logout_url = users.create_logout_url('/')
             # self.response.write('Welcome, %s! ' % user.email())
             # self.response.write('<a href="%s">Log Out</a>' % logout_url)
 
 class ProfileHandler(webapp2.RequestHandler):
+#        urlsafe_key=self.request.get('key')
+#        post_key=ndb.Key(urlsafe=urlsafe_key)
+#        post=post_key.get()
     def get(self):
+        post= Memory.query().fetch()
+        post.sort(key=lambda x:x.date, reverse=True)
+
         user = users.get_current_user()
         template = env.get_template('save.html')
+
         self.response.write('Welcome, %s! ' % user.nickname())
         template_vars2 = {'logout': users.create_logout_url('/')}
         self.response.write(template.render(template_vars2))
+
+        variables={'post': post}
+        self.response.write(template.render(variables))
+
+
+        # "post": post}
+
+#    def post(self):
+#        urlsafe_post_key = self.request.get('post_key')
+#        title = self.request.get('title')
+#        send_to = self.request.get('send_to')
+#        date = self.request.get('date')
+#        delivery = self.request.get('delivery')
+
+#        post_key = ndb.Key(urlsafe=urlsafe_post_key)
+
+#        post = Comment(content=content, post_key=post_key)
+#        post.put()
+
+#        self.redirect('/profile?key=%s' % urlsafe_post_key)
+
 
 class MemoryHandler(webapp2.RequestHandler):
     def get(self):

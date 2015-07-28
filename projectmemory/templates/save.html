@@ -2,25 +2,32 @@
 <html>
   <head>
     <title>My Profile</title>
+    <link href="../static/profilestyle.css" rel="stylesheet">
     </head>
     <body>
       <br>
       Not You? <a href="{{logout}}">Sign Out</a>
       <br>
       <div>
-        <form action="/memory">
-            <input type="submit" value="Create a new Memory!">
+        <form action="/profile">
+            <button>Create a new Memory!</button>
         </form>
-      <table style="width: 100%">
+      <!--<table style="width: 100%">-->
         <!-- {% if Memory %} -->
         {% for post in posts %}
-          <tr>
-            <tc>{{post.submit}}</tc>
+          <!--<tr>
+            <tc>{{post.title}}</tc>
             <tc>{{post.send_to}}</tc>
-            <tc>{{post.topic}}</tc>
+            <tc>{{post.date}}</tc>
             <tc>{{post.delivery}}</tc>
             <tc><button>delete</button></tc>
           </tr>
+
+        -->
+          {{post.title}}
+          {{post.send_to}}
+          {{post.date}}
+          {{post.delivery}}
         {% endfor %}
         <!-- {% endif %} -->
       </table>
