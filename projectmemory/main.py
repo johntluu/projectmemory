@@ -68,7 +68,7 @@ class ProfileHandler(webapp2.RequestHandler):
 
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
-         posts= Create.query().fetch()
+         posts= Memory.query().fetch()
          posts.sort(key=lambda x:x.date, reverse=True)
          template= env.get_template("create.html")
          variables= {'posts': posts}
