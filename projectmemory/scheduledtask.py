@@ -34,7 +34,7 @@ class ScheduledTaskHandler(webapp2.RequestHandler):
 
                 mail.send_mail(sender="%s" % "memory.delivery@project-memory.appspotmail.com",
                                to= result.send_to,
-                               subject="You have a Memory from " + current_user + ": " + result.subject,
+                               subject="You have a Memory from " + str(result.current_user) + ": " + str(result.subject),
                                body= result.content)
 
 
