@@ -71,10 +71,12 @@ class ProfileHandler(webapp2.RequestHandler):
 
 class CreateHandler(webapp2.RequestHandler):
     def get(self):
+         user = users.get_current_user()
          template= env.get_template("create.html")
          self.response.write(template.render())
 
     def post(self):
+        user = user.get_current_user()
         subject_var=self.request.get('subject')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
@@ -86,8 +88,8 @@ class CreateHandler(webapp2.RequestHandler):
                    #delivery=delivery_var)
         post.put()
 
-        mail.send_mail(sender="marisolcastillojames@gmail.com",
-        to="lwchadderdon@gmail.com",
+        mail.send_mail(sender="%s" % user.email()),
+        to=send_to_var,
         subject="SUBJECT",
         body="""
         Dear Albert:
