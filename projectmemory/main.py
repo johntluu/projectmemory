@@ -21,6 +21,7 @@ import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch
 from google.appengine.api import users
+from google.appengine.api import mail
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
@@ -28,7 +29,7 @@ class Memory(ndb.Model):
     send_to= ndb.StringProperty(required=True)
     subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
-    delivery= ndb.DateTimeProperty(required=True)
+    delivery= ndb.DateTimeProperty()
     date= ndb.DateTimeProperty(required=True, auto_now=True)
 
 
@@ -74,16 +75,31 @@ class CreateHandler(webapp2.RequestHandler):
          self.response.write(template.render())
 
     def post(self):
-        subject_var=self.request.get('title')
+        subject_var=self.request.get('subject')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
-        delivery_var=self.request.get('delivery')
+        #delivery_var=self.request.get('delivery')
         post= Memory(subject=subject_var,
                    content=content_var,
                    date=datetime.datetime.now(),
-                   send_to=send_to_var,
-                   delivery=delivery_var)
+                   send_to=send_to_var)
+                   #delivery=delivery_var)
         post.put()
+
+              mail.send_mail(sender="marisolcastillojames@gmail.com",
+              to="lwchadderdon@gmail.com",
+              subject="SUBJECT",
+              body="""
+              Dear Albert:
+
+              Your example.com account has been approved.  You can now visit
+              http://www.example.com/ and sign in using your Google Account to
+              access new features.
+
+              Please let us know if you have any questions.
+
+              The example.com Team
+              """)
         return self.redirect('/')
 
 app = webapp2.WSGIApplication([
