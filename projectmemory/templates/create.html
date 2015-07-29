@@ -9,9 +9,13 @@
     Send To <input name='send_to' type="text" size="75px"><br>
     Subject <input name='subject' type="text" size="100px"><br>
     Content <textarea name='content'></textarea><br>
-    Delivery Date <input name='delivery' type='date'>
+    Delivery Date <input name='delivery' type='date' id="delivery">
 
-    <input type="submit" id="submit" value="submit"><br>
+    <br>
+    <form action="submit">
+      <button>Submit</button>
+    </form>
+    <br>
   </form>
 <script src="/static/create.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
