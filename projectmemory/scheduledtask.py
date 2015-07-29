@@ -1,13 +1,16 @@
-from google.appengine.ext import webapp2
-from google.appengine.ext.webapp2.util import run_wsgi_app
+
+from google.appengine.ext.webapp.util import run_wsgi_app
 import jinja2
 import webapp2
+import logging
+
 
 class ScheduledTaskHandler(webapp2.RequestHandler):
     def get(self):
-        print "hello world"
+        self.response.write("RESPONSE!!!!!!!!")
+        logging.info("hello world")
 
-application = webapp.WSGIApplication([('/cron', ScheduledTaskHandler)],
+application = webapp2.WSGIApplication([('/cron', ScheduledTaskHandler)],
                                      debug=True)
 if __name__ == '__main__':
     run_wsgi_app(application)
