@@ -86,20 +86,20 @@ class CreateHandler(webapp2.RequestHandler):
                    #delivery=delivery_var)
         post.put()
 
-              mail.send_mail(sender="marisolcastillojames@gmail.com",
-              to="lwchadderdon@gmail.com",
-              subject="SUBJECT",
-              body="""
-              Dear Albert:
+        mail.send_mail(sender="marisolcastillojames@gmail.com",
+        to="lwchadderdon@gmail.com",
+        subject="SUBJECT",
+        body="""
+        Dear Albert:
 
-              Your example.com account has been approved.  You can now visit
-              http://www.example.com/ and sign in using your Google Account to
-              access new features.
+        Your example.com account has been approved.  You can now visit
+        http://www.example.com/ and sign in using your Google Account to
+        access new features.
 
-              Please let us know if you have any questions.
+        Please let us know if you have any questions.
 
-              The example.com Team
-              """)
+        The example.com Team
+        """)
         return self.redirect('/')
 
 app = webapp2.WSGIApplication([
