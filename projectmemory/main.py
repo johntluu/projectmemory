@@ -16,7 +16,6 @@
 #
 import jinja2
 import webapp2
-import jinja2
 import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch
@@ -26,11 +25,12 @@ from google.appengine.api import mail
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 class Memory(ndb.Model):
+    current_user= ndb.StringProperty(required=True)
     send_to= ndb.StringProperty(required=True)
     subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
-    delivery= ndb.DateTimeProperty()
-    date= ndb.DateTimeProperty(required=True, auto_now=True)
+    delivery= ndb.DateProperty(required=True)
+    date= ndb.DateProperty(required=True, auto_now=True)
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -63,7 +63,7 @@ class ProfileHandler(webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         template = env.get_template('profile.html')
-        posts= Memory.query().fetch()
+        posts= Memory.query(Memory.current_user == user.email()).fetch()
         posts.sort(key=lambda x:x.date, reverse=True)
         self.response.write('Welcome, %s! ' % user.nickname())
         template_vars2 = {'logout': users.create_logout_url('/'), 'posts': posts}
@@ -76,28 +76,39 @@ class CreateHandler(webapp2.RequestHandler):
          self.response.write(template.render())
 
     def post(self):
-
+        user = users.get_current_user()
+        current_user_var= user.email()
         subject_var=self.request.get('subject')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
-        #delivery_var=self.request.get('delivery')
+        delivery_var= datetime.datetime.strptime(self.request.get('delivery'), '%Y-%m-%d')
         post= Memory(subject=subject_var,
                    content=content_var,
-                   date=datetime.datetime.now(),
-                   send_to=send_to_var)
-                   #delivery=delivery_var)
-        post.put()
-        user = users.get_current_user()
-        mail.send_mail(sender="%s" % user.email(),
-        to=send_to_var,
-        subject=subject_var,
-        body=content_var)
+                   date=datetime.datetime.today(),
+                   send_to=send_to_var,
+                   delivery=delivery_var,
+                   current_user=current_user_var)
+        post.put() # stores info in the database
         return self.redirect('/')
+
+class DeleteHandler(webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        template= env.get_template('profile.html')
+        rowkey= ndb.Key(urlsafe=self.request.get("delete"))
+        rowkey.delete()
+        posts= Memory.query(Memory.current_user == user.email()).fetch()
+        self.response.write('Welcome, %s! ' % user.nickname())
+        template_vars2 = {'logout': users.create_logout_url('/'), 'posts': posts}
+        self.response.write(template.render(template_vars2))
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/profile', ProfileHandler),
     ('/create', CreateHandler),
+    ('/delete', DeleteHandler),
 
 ], debug=True)
