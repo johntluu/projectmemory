@@ -15,6 +15,7 @@
 # limitations under the License.
 #
 import jinja2
+import logging
 import webapp2
 import datetime
 from google.appengine.ext import ndb
@@ -30,6 +31,7 @@ class Memory(ndb.Model):
     subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
     delivery= ndb.DateProperty(required=True)
+    attachment=ndb.BlobProperty()
     date= ndb.DateProperty(required=True, auto_now=True)
 
 
@@ -68,26 +70,21 @@ class ProfileHandler(webapp2.RequestHandler):
         self.response.write('Welcome, %s! ' % user.nickname())
         template_vars2 = {'logout': users.create_logout_url('/'), 'posts': posts}
         self.response.write(template.render(template_vars2))
-
-class CreateHandler(webapp2.RequestHandler):
-    def get(self):
-         user = users.get_current_user()
-         template= env.get_template("create.html")
-         self.response.write(template.render())
-
     def post(self):
         user = users.get_current_user()
         current_user_var= user.email()
         subject_var=self.request.get('subject')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
+        attachment_var=self.request.get('attachment')
         delivery_var= datetime.datetime.strptime(self.request.get('delivery'), '%Y-%m-%d')
         post= Memory(subject=subject_var,
                    content=content_var,
                    date=datetime.datetime.today(),
                    send_to=send_to_var,
                    delivery=delivery_var,
-                   current_user=current_user_var)
+                   current_user=current_user_var,
+                   attachment=attachment_var)
         post.put() # stores info in the database
         return self.redirect('/')
 
@@ -108,7 +105,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/profile', ProfileHandler),
-    ('/create', CreateHandler),
     ('/delete', DeleteHandler),
 
 ], debug=True)

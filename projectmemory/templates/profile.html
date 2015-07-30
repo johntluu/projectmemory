@@ -8,9 +8,24 @@
       <br>
       <a href="{{logout}}" id="SignOutButton">Sign Out</a>
       <br>
-        <form action="/create">
-            <button id="create">Create a new Memory!</button>
-        </form>
+        <button id="create">Create a new Memory!</button>
+
+        <div id="overlay">
+          <form id="post" method="post">
+            <h1>Create A Memory</h1>
+            <p>Want to send a message to yourself or someone else in the future?<br>
+              Insert one valid email through each form submission!</p>
+
+            Send To <input name='send_to' type="text" size="75px"><br>
+            Subject <input name='subject' type="text" size="100px"><br>
+            Content<br> <textarea name='content'id="content"></textarea><br>
+            Attachment<input type="file" name="attachedfile" maxlength=50 ALLOW="text/*"><br>
+            Delivery Date <input name='delivery' type='date' id="delivery"><br>
+            <button id="submit">Submit</button>
+            <br>
+          </form>
+        </div>
+
       <p1>Saved Memories Chart</p1>
       <table style="width: 70%">
             <tr>
@@ -26,6 +41,9 @@
             <td>{{post.subject}}</td>
             <td>{{post.date}}</td>
             <td>{{post.delivery}}</td>
+            {% if post.attachment in posts %}
+              <td>{{post.attachment}}</td>
+            {% endif %}
             <td><form action="/delete"><button value={{post.key.urlsafe()}} id="delete" name="delete">delete</button></form</td>
             </tr>
         {% endfor %}
