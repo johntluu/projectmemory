@@ -8,36 +8,41 @@ from google.appengine.ext import ndb
 from google.appengine.api import mail
 from google.appengine.api import urlfetch
 from google.appengine.api import users
+from main import Memory
 
 
-class Memory(ndb.Model):
-    current_user= ndb.StringProperty(required=True)
-    send_to= ndb.StringProperty(required=True)
-    subject= ndb.StringProperty(required=True)
-    content= ndb.TextProperty(required=True)
-    delivery= ndb.DateProperty(required=True)
-    date= ndb.DateProperty(required=True, auto_now=True)
-    attachment=ndb.BlobProperty()
+# class Memory(ndb.Model):
+#     current_user= ndb.StringProperty(required=True)
+#     send_to= ndb.StringProperty(required=True)
+#     subject= ndb.StringProperty(required=True)
+#     content= ndb.TextProperty(required=True)
+#     delivery= ndb.DateProperty(required=True)
+#     date= ndb.DateProperty(required=True, auto_now=True)
+#     attachment=ndb.BlobProperty()
 
 class ScheduledTaskHandler(webapp2.RequestHandler):
     def get(self):
         currentdate = datetime.datetime.today()
         datetoday = datetime.datetime(year=currentdate.year, month=currentdate.month, day=currentdate.day)
         # datetimetoday = datetime.datetime.today()
-        var = Memory.query(Memory.delivery == datetoday).fetch()
+        memories = Memory.query(Memory.delivery == datetoday).fetch()
         # logging.info(datetoday)
         # logging.info(var)
 
         # mail function
         # user = users.get_current_user()
-        if var:
-            for result in var:
-
+        for memory in memories:
+            if memory.attachment:
                 mail.send_mail(sender="%s" % "memory.delivery@project-memory.appspotmail.com",
-                               to= result.send_to,
-                               subject="You have a Memory from " + str(result.current_user) + ": " + str(result.subject),
-                               body= result.content,
-                               attachments=[("yourattachment", result.attachment)])
+                               to= memory.send_to,
+                               subject="You have a Memory from " + str(memory.current_user) + ": " + str(memory.subject),
+                               body= memory.content,
+                               attachments=[("yourattachment", memory.attachment)])
+            else:
+                mail.send_mail(sender="%s" % "memory.delivery@project-memory.appspotmail.com",
+                               to= memory.send_to,
+                               subject="You have a Memory from " + str(memory.current_user) + ": " + str(memory.subject),
+                               body= memory.content)
 
 
 application = webapp2.WSGIApplication([('/cron', ScheduledTaskHandler)],
