@@ -17,6 +17,7 @@ class Memory(ndb.Model):
     content= ndb.TextProperty(required=True)
     delivery= ndb.DateProperty(required=True)
     date= ndb.DateProperty(required=True, auto_now=True)
+    attachment=ndb.BlobProperty()
 
 class ScheduledTaskHandler(webapp2.RequestHandler):
     def get(self):
@@ -35,7 +36,8 @@ class ScheduledTaskHandler(webapp2.RequestHandler):
                 mail.send_mail(sender="%s" % "memory.delivery@project-memory.appspotmail.com",
                                to= result.send_to,
                                subject="You have a Memory from " + str(result.current_user) + ": " + str(result.subject),
-                               body= result.content)
+                               body= result.content,
+                               attachments=[("yourattachment", result.attachment)])
 
 
 application = webapp2.WSGIApplication([('/cron', ScheduledTaskHandler)],

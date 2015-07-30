@@ -23,11 +23,13 @@
 
     $("#create").click(function(event) {
       $("#overlay").show();
+      $("#create").hide();
     });
 
     $("#overlay").click(function(event) {
       if(event.target.id=="overlay"){
         $("#overlay").hide();
+        $("#create").show();
       }
 
     });
