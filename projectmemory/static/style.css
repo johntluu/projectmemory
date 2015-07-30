@@ -13,7 +13,7 @@ h1 {
   color: black;
   font-size: 40px;*/
 header {
-  background: #427fed;
+  background-color: #79BD9A;
   font-family: 'Ruda', sans-serif;
   margin: 0;
   text-align: center;
@@ -21,7 +21,7 @@ header {
   margin: 10px;
 }
 body {
-  background: #427fed;
+  background-color: #79BD9A;
   padding-bottom: 50px;}
 img {
   width: 400px;
