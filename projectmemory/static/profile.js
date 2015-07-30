@@ -9,7 +9,8 @@
             event.preventDefault();
           }
     });
-    $("#delete").click(function(event){
+
+    $(".delete").click(function(event){
         var x = window.confirm("Are you sure you want to delete this message? This action is permanent.");
           if(x){
             /* the OK button should be a LINK (a href) to go to the (next) saved memories page */
@@ -19,6 +20,7 @@
             event.preventDefault();
           }
     });
+
     $("#create").click(function(event) {
       $("#overlay").show();
     });
