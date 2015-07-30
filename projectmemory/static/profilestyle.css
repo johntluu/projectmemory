@@ -78,6 +78,14 @@ img {
     text-decoration: none;
     color: white;
 }
+.delete {
+    font-family: Ruda, Arial, Serif;
+    display: inline-block;
+    padding: 1em;
+    background-color: #79BD9A;
+    text-decoration: none;
+    color: white;
+}
 #create {
   margin-left: -55px;
 }

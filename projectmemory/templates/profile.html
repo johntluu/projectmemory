@@ -49,7 +49,8 @@
             {% if post.attachment in posts %}
               <td>{{post.attachment}}</td>
             {% endif %}
-            <td><form action="/delete"><a id="delete" class="button hvr-back-pulse" value={{post.key.urlsafe()}} name="delete">delete</a><form></td>
+            <!-- <td><form action="/delete"><button value={{post.key.urlsafe()}} id="delete" class="button hvr-back-pulse" name="delete">delete</button></form></td> -->
+            <td><form action="/delete"><a value={{post.key.urlsafe()}} id="delete" class="delete" name="delete">delete</a></form></td>
             </tr>
         {% endfor %}
       </table>

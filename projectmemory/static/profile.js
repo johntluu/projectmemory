@@ -24,7 +24,7 @@
     $("#create").click(function(event) {
 
       $("#overlay").fadeIn(300);
-      
+
     });
 
     $("#overlay").click(function(event) {
