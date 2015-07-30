@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("#submit").click(function(){
+  $("#submit").click(function(event){
 
       var x = window.confirm("Are you satisfied with this message? You cannot edit or view this message after you click submit.");
         if(x){
@@ -7,7 +7,7 @@ $(document).ready(function(){
           window.location = "/profile"
         }
         else{
-          window.location = "/create"
+          event.preventDefault();
         }
 
   });
