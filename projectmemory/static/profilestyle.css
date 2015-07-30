@@ -27,8 +27,6 @@ body {
 }
 button:hover {
   background: #EEEEEE;
-
-
 }
 header {
   background: #79BD9A;
@@ -43,7 +41,6 @@ h2 {
   margin-top: 15px;
   padding-right: 175px;
 }
-
 img {
   width: 150px;
   height: 150px;
@@ -80,9 +77,12 @@ img {
     background-color: #79BD9A;
     text-decoration: none;
     color: white;
-    margin-left: 690px;
 }
-a {
+#create {
+  margin-left: -55px;
+}
+
+section {
     margin: 80px 650px 40px 745px;
 }
 
@@ -125,7 +125,7 @@ margin-right: auto;
 margin-top: 20px;
 }
 
-button {
+#submit {
 font-family: 'Ruda', sans-serif;
 font-size: 20px;
 color: black;

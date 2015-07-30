@@ -28,9 +28,9 @@
     </header>
       <br>
 
-    <div>
+    <section>
       <a id="create" class="button hvr-float">Create a new Memory!</a>
-    </div>
+    </section>
       <p1>Saved Memories Chart</p1>
       <table style="width: 70%">
             <tr>
@@ -49,11 +49,9 @@
             {% if post.attachment in posts %}
               <td>{{post.attachment}}</td>
             {% endif %}
-            <td><form action="/delete"><button value={{post.key.urlsafe()}} id="delete" class="delete" name="delete">delete</button></form</td>
+            <td><form action="/delete"><a id="delete" class="button hvr-back-pulse" value={{post.key.urlsafe()}} name="delete">delete</a><form></td>
             </tr>
         {% endfor %}
-
-
       </table>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
       <script src="../static/profile.js"></script>
