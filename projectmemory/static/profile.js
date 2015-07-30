@@ -22,14 +22,16 @@
     });
 
     $("#create").click(function(event) {
-      $("#overlay").show();
-      $("#create").hide();
+
+      $("#overlay").fadeIn(300);
+      
     });
 
     $("#overlay").click(function(event) {
       if(event.target.id=="overlay"){
-        $("#overlay").hide();
-        $("#create").show();
+
+        $("#overlay").fadeOut(300);
+        $("#create").fadeIn(300);
       }
 
     });
