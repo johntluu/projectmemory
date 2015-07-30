@@ -3,6 +3,7 @@ body {
   font-family: Ruda, Arial, Serif;
   font-size: 20px;
   background-image: url('upfeathers.png');
+  padding-bottom: 50px;
 }
 
 #SignOutButton {
@@ -37,11 +38,6 @@ header {
   font-size: 40px;
   text-align: center;
   padding: 10px;
-  }
-body {
-/*  background: #427fed; */
-  background-image: url('upfeathers.png');
-  padding-bottom: 50px;
 }
 h2 {
   margin-top: 15px;
@@ -101,10 +97,6 @@ td {
   font-size: 20px;
   margin: 20px;
   padding: 10px;
-}
-
-body {
-  background-color: #427fed;
 }
 form {
   text-align: center;
