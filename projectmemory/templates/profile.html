@@ -3,29 +3,34 @@
   <head>
     <title>My Profile</title>
     <link href="../static/profilestyle.css" rel="stylesheet">
+    <link href="../static/hover.css" rel="stylesheet" media="all">
     </head>
     <body>
-      <br>
+      <div id="overlay">
+        <form id="post" method="post">
+          <h1>Create A Memory</h1>
+          <p>Want to send a message to yourself or someone else in the future?<br>
+            Insert one valid email through each form submission!</p>
+
+          Send To <input name='send_to' type="text" size="75px"><br>
+          Subject <input name='subject' type="text" size="100px"><br>
+          Content<br> <textarea name='content'id="content"></textarea><br>
+          Attachment<input type="file" name="attachedfile" maxlength=50 ALLOW="text/*"><br>
+          Delivery Date <input name='delivery' type='date' id="delivery"><br>
+          <button id="submit">Submit</button>
+          <br>
+        </form>
+      </div>
+    <header>
+      <img src="../static/logo2.png" alt="logo"></img>
+      <h2>PROJECT M</h2>
       <a href="{{logout}}" id="SignOutButton">Sign Out</a>
+    </header>
       <br>
-        <button id="create">Create a new Memory!</button>
 
-        <div id="overlay">
-          <form id="post" method="post">
-            <h1>Create A Memory</h1>
-            <p>Want to send a message to yourself or someone else in the future?<br>
-              Insert one valid email through each form submission!</p>
-
-            Send To <input name='send_to' type="text" size="75px"><br>
-            Subject <input name='subject' type="text" size="100px"><br>
-            Content<br> <textarea name='content'id="content"></textarea><br>
-            Attachment<input type="file" name="attachedfile" maxlength=50 ALLOW="text/*"><br>
-            Delivery Date <input name='delivery' type='date' id="delivery"><br>
-            <button id="submit">Submit</button>
-            <br>
-          </form>
-        </div>
-
+    <div>
+      <a id="create" class="button hvr-float">Create a new Memory!</a>
+    </div>
       <p1>Saved Memories Chart</p1>
       <table style="width: 70%">
             <tr>

@@ -2,7 +2,7 @@
 body {
   font-family: Ruda, Arial, Serif;
   font-size: 20px;
-  background-color: #427fed;
+  background-image: url('upfeathers.png');
 }
 
 #SignOutButton {
@@ -17,18 +17,55 @@ body {
   border-color: black;
   padding: 10px;
   float:right;
-  margin: 5px 30px 20px 40px;
+  margin: -120px 30px 20px 40px;
+}
+#SignOutButton:hover {
+  color: white;
+  border-color: white;
+  transition: 0.2s all;
+}
+button:hover {
+  background: #EEEEEE;
+
+
+}
+header {
+  background: #79BD9A;
+  font-family: 'Ruda', sans-serif;
+  height: 100px;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  padding: 10px;
+  }
+body {
+/*  background: #427fed; */
+  background-image: url('upfeathers.png');
+  padding-bottom: 50px;
+}
+h2 {
+  margin-top: 15px;
+  padding-right: 175px;
 }
 
-#create {
+img {
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin-top: -45px;
+  margin-left: -10px;
+}
+/*#create {
   font-family: Ruda, Arial, Serif;
   width: 270px;
   height: 50px;
   font-size: 20px;
-  margin: 80px auto 40px auto;
+  margin: 80px 650px 40px 745px;
   text-align: center;
-  display: block;
+  display: inline-block;
+  text-decoration: none;
 }
+
 
 #delete {
   font-family: Ruda, Arial, Serif;
@@ -38,6 +75,19 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
+}*/
+
+.button {
+    font-family: Ruda, Arial, Serif;
+    display: inline-block;
+    padding: 1em;
+    background-color: #79BD9A;
+    text-decoration: none;
+    color: white;
+    margin-left: 690px;
+}
+a {
+    margin: 80px 650px 40px 745px;
 }
 
 table {
