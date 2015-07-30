@@ -98,6 +98,7 @@ class DeleteHandler(webapp2.RequestHandler):
         self.response.write('Welcome, %s! ' % user.nickname())
         template_vars2 = {'logout': users.create_logout_url('/'), 'posts': posts}
         self.response.write(template.render(template_vars2))
+        return self.redirect('/profile')
 
 
 
