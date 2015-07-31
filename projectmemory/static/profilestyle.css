@@ -9,20 +9,20 @@ body {
 #SignOutButton {
   text-align: center;
   font-family: 'Ruda', sans-serif;
-  color: black;
+  color: white;
   font-weight: bold;
   width: 120px;
   font-size: 30px;
   display: block;
   border-style: solid;
-  border-color: black;
+  border-color: white;
   padding: 10px;
   float:right;
   margin: -120px 30px 20px 40px;
 }
 #SignOutButton:hover {
-  color: white;
-  border-color: white;
+  color: black;
+  border-color: black;
   transition: 0.2s all;
 }
 button:hover {
@@ -81,9 +81,19 @@ img {
 .delete {
     font-family: Ruda, Arial, Serif;
     display: inline-block;
-    padding: 1em;
+    /*padding: 1em;*/
     background-color: #79BD9A;
     text-decoration: none;
+    color: white;
+    border-style: none;
+    width: 100px;
+    height: 40px;
+    margin-top: 50px;
+}
+p1 {
+    background-color: #79BD9A;
+    padding: 12px;
+    margin-left: 15%;
     color: white;
 }
 #create {

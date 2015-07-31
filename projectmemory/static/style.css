@@ -43,7 +43,11 @@ img {
   margin-right: auto;
 
 }
-
+#SignInButton:hover {
+  color: white;
+  border-color: white;
+  transition: 0.2s all;
+}
 h2 {
   color: white;
   font-size: 80px;

@@ -31,8 +31,9 @@
     <section>
       <a id="create" class="button hvr-float">Create a new Memory!</a>
     </section>
-      <p1>Saved Memories Chart</p1>
+
     <div class="data">
+      <p1>Saved Memories Chart</p1>
       <table style="width: 70%">
             <tr>
               <td class="line">Send to:</td>
@@ -51,7 +52,11 @@
               <td>{{post.attachment}}</td>
             {% endif %}
             <!-- <td><form action="/delete"><button value={{post.key.urlsafe()}} id="delete" class="button hvr-back-pulse" name="delete">delete</button></form></td> -->
-            <td><form action="/delete"><a value={{post.key.urlsafe()}} id="delete" class="delete" name="delete">delete</a></form></td>
+            <td>
+            <form action="/delete">
+              <input type='text' hidden value={{post.key.urlsafe()}} name='delete'>
+              <input type='submit' value='delete' id="delete" class="delete hvr-wobble-horizontal" name="delete">
+            </form></td>
             </tr>
         {% endfor %}
       </table>
