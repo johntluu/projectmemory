@@ -31,7 +31,7 @@ class Memory(ndb.Model):
     subject= ndb.StringProperty(required=True)
     content= ndb.TextProperty(required=True)
     delivery= ndb.DateProperty(required=True)
-    attachment=ndb.BlobProperty()
+    #attachment=ndb.BlobProperty()
     date= ndb.DateProperty(required=True, auto_now=True)
 
 
@@ -76,15 +76,15 @@ class ProfileHandler(webapp2.RequestHandler):
         subject_var=self.request.get('subject')
         content_var=self.request.get('content')
         send_to_var=self.request.get('send_to')
-        attachment_var=self.request.get('attachment')
+        #attachment_var=self.request.get('attachment')
         delivery_var= datetime.datetime.strptime(self.request.get('delivery'), '%Y-%m-%d')
         post= Memory(subject=subject_var,
                    content=content_var,
                    date=datetime.datetime.today(),
                    send_to=send_to_var,
                    delivery=delivery_var,
-                   current_user=current_user_var,
-                   attachment=attachment_var)
+                   current_user=current_user_var)
+                   #attachment=attachment_var)
         post.put() # stores info in the database
         return self.redirect('/')
 

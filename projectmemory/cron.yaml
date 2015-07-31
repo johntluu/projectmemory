@@ -1,5 +1,5 @@
 cron:
 - description: daily check
   url: /cron
-  schedule: every 30 mins
-  timezone: PST
+  schedule: every 1 hours
+  timezone: America/Los_Angeles
